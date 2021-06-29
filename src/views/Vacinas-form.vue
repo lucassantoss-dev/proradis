@@ -8,22 +8,22 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Fabricante: *</label>
-                  <input 
-                  type="text" 
-                  class="form-control" 
-                  name="fabricante" 
-                  v-model="vacinas.fabricante"
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="fabricante"
+                    v-model="vacinas.fabricante"
                   />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Lote: *</label>
-                  <input 
-                  type="text" 
-                  class="form-control" 
-                  name="lote"
-                  v-model="vacinas.lote" 
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="lote"
+                    v-model="vacinas.lote"
                   />
                 </div>
               </div>
@@ -32,22 +32,22 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Validade: *</label>
-                  <input 
-                  type="text" 
-                  class="form-control" 
-                  name="validade" 
-                  v-model="vacinas.validade"
+                  <input
+                    type="date"
+                    class="form-control"
+                    name="validade"
+                    v-model="vacinas.validade"
                   />
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Quantidade: *</label>
-                  <input 
-                  type="text" 
-                  class="form-control" 
-                  name="qtd"
-                  v-model="vacinas.qtd" 
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="qtd"
+                    v-model="vacinas.qtd"
                   />
                 </div>
               </div>
@@ -56,30 +56,32 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Intervalo entre as doses: *</label>
-                  <input 
-                  type="text" 
-                  class="form-control" 
-                  name="intervalo"
-                v-model="vacinas.intervalo"
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="intervalo"
+                    v-model="vacinas.intervalo"
                   />
                 </div>
               </div>
             </div>
-            <br>
+            <br />
             <div class="row">
-            <div class="col-md-3">
-                <button @click="addVacina" type="submit" class="btn btn-primary input-group-btn">
-                    <i class="fa fa-save"></i> Salvar
+              <div class="col-md-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary input-group-btn"
+                >
+                  <i class="fa fa-save"></i> Salvar
                 </button>
-                <router-link class="color-0e5caf" :to="'/vacinas'">    
-                            <button type="submit" class="btn btn-danger ml-1">
-                            <i class="fa fa-arrow-alt-circle-left">
-                            </i>
-                            Voltar
-                            </button>
-                        </router-link>
+                <router-link class="color-0e5caf" :to="'/vacinas'">
+                  <button type="submit" class="btn btn-danger ml-1">
+                    <i class="fa fa-arrow-alt-circle-left"> </i>
+                    Voltar
+                  </button>
+                </router-link>
+              </div>
             </div>
-        </div>
           </form>
         </div>
       </div>
@@ -88,42 +90,38 @@
 </template>
 
 <script>
-import Dashboard from '../views/Dashboard.vue';
-import axios from '../../axios'
+import Dashboard from "../views/Dashboard.vue";
+import axios from "../../axios";
 
 export default {
-    name: 'Vacinas-form',
-    components: {
-        
-        Dashboard
-        },
-    data() {
-        return {
-            vacinas: {
-              Fabricante: '',
-              lote: '',
-              validade: '',
-              qtd: '',
-              intervalo: '',
-            },
-            vacform: [],
-            newVac: {
-              id: null
-            }
-        }
+  name: "Vacinas-form",
+  components: {
+    Dashboard,
+  },
+  data() {
+    return {
+      vacinas: {
+        Fabricante: "",
+        lote: "",
+        validade: "",
+        qtd: "",
+        intervalo: "",
+      },
+      vacform: [],
+      newVac: {
+        id: null,
+      },
+    };
+  },
+  methods: {
+    addVacina() {
+      axios.post("/vacina", this.vacinas);
+      this.newVac.id = Date.now();
+      this.vacform.push(this.newVac);
+      this.newVac = { checked: false };
     },
-    methods: {
-        addVacina(){
-            axios.post('/vacina', this.vacinas);
-            this.newVac.id = Date.now();
-            this.vacform.push(this.newVac);
-            this.newVac = {checked: false};       
-        },
-    }
+  },
 };
-
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
